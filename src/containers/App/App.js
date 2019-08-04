@@ -10,7 +10,7 @@ import { provideHooks } from 'redial';
 // import Navbar from 'react-bootstrap/lib/Navbar';
 // import Nav from 'react-bootstrap/lib/Nav';
 // import NavItem from 'react-bootstrap/lib/NavItem';
-import Alert from 'react-bootstrap/lib/Alert';
+import { Alert } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 import qs from 'qs';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
@@ -32,7 +32,7 @@ import NavBar from 'components/NavBar/NavBar';
 @connect(
   state => ({
     notifs: state.notifs,
-    // user: state.auth.user
+    user: state.auth.user
   }),
   { logout: logoutAction, pushState: push }
 )
@@ -42,7 +42,7 @@ class App extends Component {
     route: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.objectOf(PropTypes.any).isRequired,
     user: PropTypes.shape({
-      email: PropTypes.string
+      username: PropTypes.string
     }),
     notifs: PropTypes.shape({
       global: PropTypes.array
@@ -115,9 +115,7 @@ class App extends Component {
             NotifComponent={props => <Alert bsStyle={props.kind}>{props.message}</Alert>}
           />
         )}
-        <div className="container">
-          {renderRoutes(route.routes)}
-        </div>
+        <div className="container">{renderRoutes(route.routes)}</div>
       </div>
     );
   }
